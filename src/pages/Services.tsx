@@ -1,6 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Waves } from '@/components/ui/waves-background';
+import { AnimatedSection } from '@/components/ui/animated-section';
+import { AnimatedHeroText } from '@/components/ui/animated-hero-text';
+import { motion } from 'framer-motion';
 import { 
   Target, 
   Lightbulb, 
@@ -73,21 +77,69 @@ const Services = () => {
   ];
 
   return (
-    <div className="pt-16">
-      {/* Hero Section */}
-      <section className="py-24 hero-gradient">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="font-heading text-5xl md:text-6xl font-bold mb-6">
-              Premium <span className="gold-accent">Services</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed mb-8">
-              Seven core services designed to transform your brand and amplify your market presence. 
-              Each service is crafted with luxury precision and strategic excellence.
-            </p>
-            <Button size="lg" className="btn-luxury text-primary-foreground">
-              Schedule Consultation
-            </Button>
+    <div className="-mt-20 md:-mt-24">
+      {/* Hero Section with Waves Background */}
+      <section className="relative w-full h-screen min-h-[600px] overflow-hidden bg-background">
+        {/* Waves Background - Light mode (subtle dark lines) */}
+        <div className="absolute inset-0 w-full h-full dark:hidden">
+          <Waves
+            lineColor="rgba(46, 45, 45, 0.17)"
+            backgroundColor="transparent"
+            waveSpeedX={0.015}
+            waveSpeedY={0.008}
+            waveAmpX={35}
+            waveAmpY={18}
+            friction={0.92}
+            tension={0.006}
+            maxCursorMove={90}
+            xGap={12}
+            yGap={32}
+          />
+        </div>
+
+        {/* Waves Background - Dark mode (brighter white lines) */}
+        <div className="absolute inset-0 w-full h-full hidden dark:block">
+          <Waves
+            lineColor="rgba(202, 202, 202, 0.37)"
+            backgroundColor="transparent"
+            waveSpeedX={0.015}
+            waveSpeedY={0.008}
+            waveAmpX={35}
+            waveAmpY={18}
+            friction={0.92}
+            tension={0.006}
+            maxCursorMove={90}
+            xGap={12}
+            yGap={32}
+          />
+        </div>
+
+        {/* Content Overlay */}
+        <div className="relative z-10 flex items-center justify-center h-full py-20">
+          <div className="container mx-auto px-6">
+            <div className="max-w-4xl mx-auto text-center">
+              <AnimatedHeroText className="font-heading text-5xl md:text-6xl font-bold mb-6 drop-shadow-lg">
+                Premium Services
+              </AnimatedHeroText>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8, duration: 0.6 }}
+                className="text-xl md:text-2xl text-muted-foreground leading-relaxed mb-8 drop-shadow-md"
+              >
+                Seven core services designed to transform your brand and amplify your market presence. 
+                Each service is crafted with luxury precision and strategic excellence.
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1, duration: 0.6 }}
+              >
+                <Button size="lg" className="btn-luxury text-primary-foreground">
+                  Schedule Consultation
+                </Button>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -97,7 +149,8 @@ const Services = () => {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {services.map((service, index) => (
-              <Card key={index} className="luxury-card elegant-hover group">
+              <AnimatedSection key={index} delay={index * 0.1}>
+                <Card className="luxury-card elegant-hover group">
                 <CardHeader className="pb-6">
                   <div className="flex items-start justify-between">
                     <div className="text-primary group-hover:scale-110 transition-transform duration-300">
@@ -137,6 +190,7 @@ const Services = () => {
                   </div>
                 </CardContent>
               </Card>
+              </AnimatedSection>
             ))}
           </div>
         </div>
@@ -161,13 +215,15 @@ const Services = () => {
               { step: '03', title: 'Execution', description: 'Implement campaigns with precision and excellence' },
               { step: '04', title: 'Optimization', description: 'Continuously refine and optimize for maximum impact' }
             ].map((phase, index) => (
-              <div key={index} className="text-center group">
-                <div className="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-2xl font-bold text-primary-foreground">{phase.step}</span>
+              <AnimatedSection key={index} delay={index * 0.15}>
+                <div className="text-center group">
+                  <div className="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-2xl font-bold text-primary-foreground">{phase.step}</span>
+                  </div>
+                  <h3 className="font-heading text-xl font-semibold mb-3">{phase.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{phase.description}</p>
                 </div>
-                <h3 className="font-heading text-xl font-semibold mb-3">{phase.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{phase.description}</p>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>

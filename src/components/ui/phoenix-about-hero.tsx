@@ -27,18 +27,18 @@ const AboutContent = () => {
   ];
 
   const timeline = [
-    { year: '2016', event: 'Phoenix Marketing Services founded in New York', icon: <MapPin className="w-5 h-5" /> },
-    { year: '2018', event: 'Expanded to London office, serving European markets', icon: <Globe className="w-5 h-5" /> },
-    { year: '2020', event: 'Opened Tokyo office, establishing Asia-Pacific presence', icon: <Target className="w-5 h-5" /> },
+    { year: '2016', event: 'Phoenix Marketing Services founded in Bangalore', icon: <MapPin className="w-5 h-5" /> },
+    { year: '2018', event: 'Expanded to serve pan-India markets', icon: <Globe className="w-5 h-5" /> },
+    { year: '2020', event: 'Established strong presence in South Indian markets', icon: <Target className="w-5 h-5" /> },
     { year: '2022', event: 'Reached 200+ premium brand partnerships', icon: <Award className="w-5 h-5" /> },
-    { year: '2024', event: 'Leading luxury marketing agency with global reach', icon: <Users className="w-5 h-5" /> }
+    { year: '2024', event: 'Leading marketing agency in Bangalore', icon: <Users className="w-5 h-5" /> }
   ];
 
   const stats = [
-    { number: '250+', label: 'Premium Clients', description: 'Luxury brands trust us' },
+    { number: '250+', label: 'Premium Clients', description: 'Brands trust us' },
     { number: '8', label: 'Years Excellence', description: 'Proven track record' },
     { number: '50+', label: 'Awards Won', description: 'Industry recognition' },
-    { number: '3', label: 'Global Offices', description: 'Worldwide presence' }
+    { number: '1', label: 'Location', description: 'Bangalore, India' }
   ];
 
   return (

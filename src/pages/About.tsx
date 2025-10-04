@@ -1,11 +1,8 @@
-import { PhoenixHybridAbout } from '@/components/ui/phoenix-hybrid-about';
+import React from 'react';
+import { PhoenixAboutPage } from '@/components/ui/phoenix-about-page';
 
 const About = () => {
-  return (
-    <div>
-      <PhoenixHybridAbout />
-    </div>
-  );
+  return <PhoenixAboutPage />;
 };
 
 export default About;

@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { AnimatedSection } from '@/components/ui/animated-section';
+import { AnimatedHeroText } from '@/components/ui/animated-hero-text';
+import { motion } from 'framer-motion';
 import { ExternalLink, ArrowRight } from 'lucide-react';
 
 const Work = () => {
@@ -88,13 +91,18 @@ const Work = () => {
       <section className="py-24 hero-gradient">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="font-heading text-5xl md:text-6xl font-bold mb-6">
-              Our <span className="gold-accent">Work</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
+            <AnimatedHeroText className="font-heading text-5xl md:text-6xl font-bold mb-6">
+              Our Work
+            </AnimatedHeroText>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.6 }}
+              className="text-xl md:text-2xl text-muted-foreground leading-relaxed"
+            >
               A showcase of transformative campaigns and strategic successes that have elevated 
               premium brands to new heights of market leadership.
-            </p>
+            </motion.p>
           </div>
         </div>
       </section>

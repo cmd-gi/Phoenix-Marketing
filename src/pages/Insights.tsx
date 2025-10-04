@@ -1,7 +1,11 @@
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { AnimatedSection } from '@/components/ui/animated-section';
+import { AnimatedHeroText } from '@/components/ui/animated-hero-text';
+import { motion } from 'framer-motion';
 import { Calendar, Clock, ArrowRight, TrendingUp } from 'lucide-react';
+import { EtherealShadow } from '@/components/ui/ethereal-shadow';
 
 const Insights = () => {
   const featuredPost = {
@@ -74,17 +78,36 @@ const Insights = () => {
   const categories = ['All', 'Strategy', 'Branding', 'Digital', 'Research', 'Events', 'Analytics', 'Sustainability'];
 
   return (
-    <div className="pt-16">
-      {/* Hero Section */}
-      <section className="py-24 hero-gradient">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="font-heading text-5xl md:text-6xl font-bold mb-6">
-              Marketing <span className="gold-accent">Insights</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
-              Expert perspectives, industry trends, and strategic insights from our team of luxury marketing specialists.
-            </p>
+    <div className="-mt-20 md:-mt-24">
+      {/* Hero Section with Optimized Ethereal Shadow */}
+      <section className="relative w-full h-screen min-h-[600px] overflow-hidden bg-background">
+        {/* Optimized Ethereal Shadow Background */}
+        <div className="absolute inset-0 w-full h-full will-change-transform">
+          <EtherealShadow
+            color="hsl(var(--foreground) / 0.25)"
+            animation={{ scale: 80, speed: 60 }}
+            noise={{ opacity: 0.3, scale: 1.0 }}
+            sizing="stretch"
+            className="w-full h-full transform-gpu"
+          />
+        </div>
+        
+        {/* Content Overlay */}
+        <div className="relative z-10 flex items-center justify-center h-full py-20">
+          <div className="container mx-auto px-6">
+            <div className="max-w-4xl mx-auto text-center">
+              <AnimatedHeroText className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 drop-shadow-lg">
+                Marketing Insights
+              </AnimatedHeroText>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.2 }}
+                className="text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto drop-shadow-md"
+              >
+                Expert perspectives, industry trends, and strategic insights from our team of marketing specialists.
+              </motion.p>
+            </div>
           </div>
         </div>
       </section>
@@ -93,8 +116,9 @@ const Insights = () => {
       <section className="py-16">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
-            <Card className="luxury-card elegant-hover overflow-hidden">
-              <div className="grid grid-cols-1 lg:grid-cols-2">
+            <AnimatedSection>
+              <Card className="luxury-card elegant-hover overflow-hidden">
+                <div className="grid grid-cols-1 lg:grid-cols-2">
                 <div className="relative">
                   <img 
                     src={featuredPost.image} 
@@ -135,6 +159,7 @@ const Insights = () => {
                 </CardContent>
               </div>
             </Card>
+            </AnimatedSection>
           </div>
         </div>
       </section>
@@ -157,60 +182,62 @@ const Insights = () => {
         </div>
       </section>
 
-      {/* Insights Grid */}
+      {/* Insights Grid - Optimized */}
       <section className="py-24">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            {insights.map((insight, index) => (
-              <Card key={index} className="luxury-card elegant-hover group overflow-hidden">
-                <div className="relative overflow-hidden">
-                  <img 
-                    src={insight.image} 
-                    alt={insight.title}
-                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <Badge variant="outline" className="absolute top-4 left-4 bg-background/90 border-primary text-primary">
-                    {insight.category}
-                  </Badge>
-                </div>
+          <AnimatedSection>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+              {insights.map((insight, index) => (
+                <Card key={index} className="luxury-card elegant-hover group overflow-hidden transform-gpu">
+                  <div className="relative overflow-hidden">
+                    <img 
+                      src={insight.image} 
+                      alt={insight.title}
+                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300 will-change-transform"
+                      loading="lazy"
+                    />
+                    <Badge variant="outline" className="absolute top-4 left-4 bg-background/90 border-primary text-primary">
+                      {insight.category}
+                    </Badge>
+                  </div>
                 
-                <CardHeader className="pb-3">
-                  <h3 className="font-heading text-lg font-bold leading-tight group-hover:text-primary transition-colors">
-                    {insight.title}
-                  </h3>
-                </CardHeader>
-                
-                <CardContent className="pt-0">
-                  <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-                    {insight.excerpt}
-                  </p>
                   
-                  <div className="flex items-center justify-between text-xs text-muted-foreground mb-4">
-                    <span className="font-medium">{insight.author}</span>
-                    <div className="flex items-center space-x-3">
-                      <div className="flex items-center space-x-1">
-                        <Calendar className="w-3 h-3" />
-                        <span>{new Date(insight.date).toLocaleDateString()}</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <Clock className="w-3 h-3" />
-                        <span>{insight.readTime}</span>
+                  <CardHeader className="pb-3">
+                    <h3 className="font-heading text-lg font-bold leading-tight group-hover:text-primary transition-colors">
+                      {insight.title}
+                    </h3>
+                  </CardHeader>
+                  
+                  <CardContent className="pt-0">
+                    <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
+                      {insight.excerpt}
+                    </p>
+                    
+                    <div className="flex items-center justify-between text-xs text-muted-foreground mb-4">
+                      <span className="font-medium">{insight.author}</span>
+                      <div className="flex items-center space-x-3">
+                        <div className="flex items-center space-x-1">
+                          <Calendar className="w-3 h-3" />
+                          <span>{new Date(insight.date).toLocaleDateString()}</span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <Clock className="w-3 h-3" />
+                          <span>{insight.readTime}</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  
-                  <Button variant="ghost" className="w-full text-primary hover:bg-primary hover:text-primary-foreground group">
-                    Read More
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                    
+                    <Button variant="ghost" className="w-full text-primary hover:bg-primary hover:text-primary-foreground group">
+                      Read More
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </AnimatedSection>
         </div>
-      </section>
-
-      {/* Newsletter Signup */}
+      </section>      {/* Newsletter Signup */}
       <section className="py-24 bg-card">
         <div className="container mx-auto px-6">
           <div className="max-w-2xl mx-auto text-center">

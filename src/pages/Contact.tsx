@@ -5,6 +5,10 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
+import { AnimatedSection } from '@/components/ui/animated-section';
+import { AnimatedHeroText } from '@/components/ui/animated-hero-text';
+import { motion } from 'framer-motion';
+import { FlickeringGrid } from '@/components/ui/flickering-grid';
 import { 
   Mail, 
   Phone, 
@@ -55,25 +59,11 @@ const Contact = () => {
 
   const offices = [
     {
-      city: 'New York',
-      address: '432 Park Avenue, Suite 1200\nNew York, NY 10016',
-      phone: '+1 (555) 123-4567',
-      email: 'ny@phoenixmarketing.com',
-      timezone: 'EST'
-    },
-    {
-      city: 'London',
-      address: '25 Old Bond Street\nMayfair, London W1S 4QB',
-      phone: '+44 20 7123 4567',
-      email: 'london@phoenixmarketing.com',
-      timezone: 'GMT'
-    },
-    {
-      city: 'Tokyo',
-      address: '1-1-1 Shibuya, Shibuya City\nTokyo 150-0002, Japan',
-      phone: '+81 3 1234 5678',
-      email: 'tokyo@phoenixmarketing.com',
-      timezone: 'JST'
+      city: 'Bangalore',
+      address: 'Phoenix Crest Marketing\nBangalore, Karnataka\nIndia',
+      phone: '+91 89514 48408',
+      email: 'hello@phoenixmarketing.com',
+      timezone: 'IST'
     }
   ];
 
@@ -96,18 +86,50 @@ const Contact = () => {
   ];
 
   return (
-    <div className="pt-16">
-      {/* Hero Section */}
-      <section className="py-24 hero-gradient">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="font-heading text-5xl md:text-6xl font-bold mb-6">
-              Let's Create Something <span className="gold-accent">Extraordinary</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
-              Ready to elevate your brand? We're here to discuss your vision and develop 
-              a strategic approach that delivers transformative results.
-            </p>
+    <div className="-mt-20 md:-mt-24">
+      {/* Hero Section with FlickeringGrid Background */}
+      <section className="relative w-full h-screen min-h-[600px] overflow-hidden bg-background">
+        {/* FlickeringGrid Background - Light mode (subtle dark grid) */}
+        <div className="absolute inset-0 w-full h-full dark:hidden">
+          <FlickeringGrid
+            className="z-0 absolute inset-0"
+            squareSize={4}
+            gridGap={6}
+            color="rgba(0, 0, 0, 1)"
+            maxOpacity={0.08}
+            flickerChance={0.05}
+          />
+        </div>
+
+        {/* FlickeringGrid Background - Dark mode (brighter white grid) */}
+        <div className="absolute inset-0 w-full h-full hidden dark:block">
+          <FlickeringGrid
+            className="z-0 absolute inset-0"
+            squareSize={4}
+            gridGap={6}
+            color="rgba(255, 255, 255, 1)"
+            maxOpacity={0.15}
+            flickerChance={0.08}
+          />
+        </div>
+
+        {/* Content Overlay */}
+        <div className="relative z-10 flex items-center justify-center h-full py-20">
+          <div className="container mx-auto px-6">
+            <div className="max-w-4xl mx-auto text-center">
+              <AnimatedHeroText className="font-heading text-5xl md:text-6xl font-bold mb-6 drop-shadow-lg">
+                Let's Create Something Extraordinary
+              </AnimatedHeroText>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.2 }}
+                className="text-xl md:text-2xl text-muted-foreground leading-relaxed drop-shadow-md"
+              >
+                Ready to elevate your brand? We're here to discuss your vision and develop 
+                a strategic approach that delivers transformative results.
+              </motion.p>
+            </div>
           </div>
         </div>
       </section>
@@ -119,7 +141,8 @@ const Contact = () => {
             
             {/* Contact Form */}
             <div className="lg:col-span-2">
-              <Card className="luxury-card">
+              <AnimatedSection>
+                <Card className="luxury-card">
                 <CardHeader>
                   <CardTitle className="font-heading text-2xl font-bold flex items-center">
                     <Send className="w-6 h-6 text-primary mr-3" />
@@ -171,7 +194,7 @@ const Contact = () => {
                           type="tel"
                           value={formData.phone}
                           onChange={(e) => handleInputChange('phone', e.target.value)}
-                          placeholder="+1 (555) 123-4567"
+                          placeholder="+91 89514 48408"
                           className="bg-background border-border"
                         />
                       </div>
@@ -229,6 +252,7 @@ const Contact = () => {
                   </form>
                 </CardContent>
               </Card>
+              </AnimatedSection>
             </div>
 
             {/* Contact Information */}
@@ -251,7 +275,9 @@ const Contact = () => {
                     <Phone className="w-5 h-5 text-primary" />
                     <div>
                       <p className="font-medium">Phone</p>
-                      <p className="text-sm text-muted-foreground">+1 (555) 123-4567</p>
+                      <a href="tel:+918951448408" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                        +91 89514 48408
+                      </a>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
